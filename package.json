@@ -1,0 +1,20 @@
+{
+  "name": "winter-workspace",
+  "version": "1.0.0",
+  "description": "A sample TypeScript project for winter workspace.",
+  "main": "src/app.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/app.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^4.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/winter-workspace.git"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
