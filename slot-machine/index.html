@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Slot Machine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-layout">
+        <div class="history-container">
+            <h3>Spin History</h3>
+            <div id="winHistory" class="win-list"></div>
+        </div>
+        <div class="container">
+            <div class="key-container">
+            <h3>Symbol Values</h3>
+            <div class="symbols-grid">
+                <div class="symbol-item">❌ = 0x</div>
+                <div class="symbol-item">🍒 = 2x</div>
+                <div class="symbol-item">🍋 = 3x</div>
+                <div class="symbol-item">🍊 = 4x</div>
+                <div class="symbol-item">🍎 = 5x</div>
+                <div class="symbol-item">🍌 = 6x</div>
+                <div class="symbol-item">🫐 = 8x</div>
+                <div class="symbol-item">🍇 = 10x</div>
+                <div class="symbol-item">💎 = 15x</div>
+            </div>
+            <div class="winning-info">
+                <p>Match 3 symbols: Base multiplier</p>
+                <p>Match 4 symbols: 2x Base multiplier</p>
+                <p>Match 5 symbols: 3x Base multiplier</p>
+            </div>
+        </div>
+        <div class="balance-container">
+            <h2>Tokens: <span id="balance">25</span></h2>
+        </div>
+        
+        <div class="slot-machine">
+            <div class="slots-container">
+                <div class="slot" id="slot1">🍒</div>
+                <div class="slot" id="slot2">🍌</div>
+                <div class="slot" id="slot3">🍊</div>
+                <div class="slot" id="slot4">🍎</div>
+                <div class="slot" id="slot5">🍋</div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <div class="bet-controls">
+                <button id="decreaseBet">-</button>
+                <span id="currentBet">1</span>
+                <button id="increaseBet">+</button>
+            </div>
+            <button id="spinButton" class="spin-button">SPIN</button>
+        </div>
+
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bar Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-layout">
+        <div class="container">
+            <div class="balance-container">
+                <div id="balance">1000</div>
+            </div>
+            <div class="game-container">
+            <div class="bar">
+                <div class="slider" id="slider"></div>
+                <div class="result-marker" id="resultMarker"></div>
+                <div class="tic-marks">
+                    <div class="tic-label left">0</div>
+                    <div class="tic-marks-container"></div>
+                    <div class="tic-label right">100</div>
+                </div>
+                <div class="drag-button" id="dragButton"></div>
+            </div>
+            <div class="value-display">
+                <span id="sliderValue">50</span>
+                <span class="multiplier-display">(<span id="multiplierValue">2.00</span>x)</span>
+            </div>
+            <div class="bet-controls">
+                <button id="decreaseBet">-</button>
+                <span id="currentBet">10</span>
+                <button id="increaseBet">+</button>
+            </div>
+            <button id="playButton" class="play-button">PLAY</button>
+            <div class="message" id="message"></div>
+            </div>
+        </div>
+        <div class="history-container">
+            <h3 class="history-title">History</h3>
+            <div class="history-list" id="historyList"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
