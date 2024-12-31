@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mines - SpendingPants Arcade</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-layout">
+        <div class="sidebar">
+                <div class="balance-container">
+                    <h2>Balance</h2>
+                    <div class="balance-display">
+                        <span id="balance">0</span>
+                        <span class="currency">Tokens</span>
+                    </div>
+                </div>
+
+            <div class="controls-container">
+                <div class="bet-section">
+                    <h3>Bet Amount</h3>
+                    <div class="bet-input">
+                        <input type="number" id="betAmount" value="100" min="1">
+                        <div class="bet-buttons">
+                            <button class="bet-button" data-action="half">½</button>
+                            <button class="bet-button" data-action="double">2×</button>
+                            <button class="bet-button" data-action="max">Max</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mines-section">
+                    <h3>Number of Mines</h3>
+                    <div class="mines-input">
+                        <input type="number" id="minesCount" min="1" max="24" value="3">
+                        <div class="mines-grid">
+                            <button class="mines-button" data-mines="3">3</button>
+                            <button class="mines-button" data-mines="5">5</button>
+                            <button class="mines-button" data-mines="10">10</button>
+                            <button class="mines-button" data-mines="15">15</button>
+                            <button class="mines-button" data-mines="20">20</button>
+                            <button class="mines-button" data-mines="24">24</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-section">
+                    <div class="stat-item">
+                        <span class="stat-label">Next Profit</span>
+                        <span id="nextProfit" class="stat-value">0.00×</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Profit</span>
+                        <span id="totalProfit" class="stat-value">0</span>
+                    </div>
+                </div>
+
+                <button id="startGame" class="play-button">
+                    <span class="button-text">START GAME</span>
+                </button>
+
+                <button id="cashout" class="cashout-button" disabled>
+                    <span class="button-text">CASHOUT</span>
+                    <span class="button-subtext"><span id="cashoutAmount">0.00</span>×</span>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="main-content">
+
+        <div class="game-container">
+            <div class="mines-board">
+            <!-- 5x5 grid = 25 tiles -->
+            <div class="tile" data-index="0"></div>
+            <div class="tile" data-index="1"></div>
+            <div class="tile" data-index="2"></div>
+            <div class="tile" data-index="3"></div>
+            <div class="tile" data-index="4"></div>
+            <div class="tile" data-index="5"></div>
+            <div class="tile" data-index="6"></div>
+            <div class="tile" data-index="7"></div>
+            <div class="tile" data-index="8"></div>
+            <div class="tile" data-index="9"></div>
+            <div class="tile" data-index="10"></div>
+            <div class="tile" data-index="11"></div>
+            <div class="tile" data-index="12"></div>
+            <div class="tile" data-index="13"></div>
+            <div class="tile" data-index="14"></div>
+            <div class="tile" data-index="15"></div>
+            <div class="tile" data-index="16"></div>
+            <div class="tile" data-index="17"></div>
+            <div class="tile" data-index="18"></div>
+            <div class="tile" data-index="19"></div>
+            <div class="tile" data-index="20"></div>
+            <div class="tile" data-index="21"></div>
+            <div class="tile" data-index="22"></div>
+            <div class="tile" data-index="23"></div>
+            <div class="tile" data-index="24"></div>
+        </div>
+
+            </div>
+        </div>
+
+        <div class="history-container">
+            <h3>Recent Games</h3>
+            <div id="gameHistory" class="history-list"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

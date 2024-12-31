@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpendingPants Arcade</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="arcade-layout">
+        <nav class="game-nav">
+            <button class="game-button active" data-game="blackjack">
+                <span class="game-icon">♠️</span>
+                Blackjack
+            </button>
+            <button class="game-button" data-game="plinko">
+                <span class="game-icon">🔵</span>
+                Plinko
+            </button>
+            <button class="game-button" data-game="plinko2">
+                <span class="game-icon">⚡</span>
+                Neon Plinko
+            </button>
+            <button class="game-button" data-game="slots">
+                <span class="game-icon">🎰</span>
+                Slots
+            </button>
+            <button class="game-button" data-game="mines">
+                <span class="game-icon">💣</span>
+                Mines
+            </button>
+            <button class="game-button" data-game="crash">
+                <span class="game-icon">📈</span>
+                Crash
+            </button>
+            <button class="game-button" data-game="balloon-crash">
+                <span class="game-icon">🎈</span>
+                Balloon Crash
+            </button>
+            <button class="game-button" data-game="battleship">
+                <span class="game-icon">⚓</span>
+                Battleship
+            </button>
+        </nav>
+        
+        <div class="main-content">
+            <header>
+                <div class="logo-container">
+                    <img src="logo.svg" alt="SpendingPants Logo" class="logo">
+                    <h1>SpendingPants Arcade</h1>
+                </div>
+                <div class="balance-container">
+                    <h2>Balance: <span id="balance">0</span> Tokens</h2>
+                    <button id="depositButton" class="deposit-button">Add Tokens</button>
+                </div>
+            </header>
+
+            <main class="game-container">
+            <iframe id="gameFrame" src="games/blackjack/index.html" frameborder="0"></iframe>
+            </main>
+        </div>
+    </div>
+
+    <!-- Deposit Modal -->
+    <div id="depositModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Add Tokens</h2>
+            <div class="deposit-options">
+                <button class="deposit-option" data-amount="100">100 Tokens</button>
+                <button class="deposit-option" data-amount="500">500 Tokens</button>
+                <button class="deposit-option" data-amount="1000">1000 Tokens</button>
+                <button class="deposit-option" data-amount="5000">5000 Tokens</button>
+            </div>
+            <div class="custom-deposit">
+                <label for="customAmount">Custom Amount:</label>
+                <input type="number" id="customAmount" min="1" step="1" value="100">
+                <button id="customDepositButton">Add Custom Amount</button>
+            </div>
+            <button class="close-modal">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

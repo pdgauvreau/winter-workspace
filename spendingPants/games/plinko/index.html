@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plinko - SpendingPants Arcade</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="game-layout">
+        <div class="sidebar">
+            <div class="balance-container">
+                <h2>Balance</h2>
+                <div class="balance-display">
+                    <span id="balance">0</span>
+                    <span class="currency">Tokens</span>
+                </div>
+            </div>
+
+            <div class="controls-container">
+                <div class="bet-section">
+                    <h3>Bet Amount</h3>
+                    <div class="bet-input">
+                        <input type="number" id="currentBet" value="10" min="1">
+                        <div class="bet-buttons">
+                            <button class="bet-button" data-action="half">½</button>
+                            <button class="bet-button" data-action="double">2×</button>
+                            <button class="bet-button" data-action="max">Max</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="risk-section">
+                    <h3>Risk Level</h3>
+                    <div class="risk-buttons">
+                        <button class="risk-button active" data-risk="low">
+                            <span class="risk-label">Low</span>
+                            <span class="risk-multiplier">1.5×</span>
+                        </button>
+                        <button class="risk-button" data-risk="medium">
+                            <span class="risk-label">Medium</span>
+                            <span class="risk-multiplier">2×</span>
+                        </button>
+                        <button class="risk-button" data-risk="high">
+                            <span class="risk-label">High</span>
+                            <span class="risk-multiplier">4×</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="rows-section">
+                    <h3>Board Size</h3>
+                    <div class="rows-grid">
+                        <button class="row-button" data-rows="8">8</button>
+                        <button class="row-button" data-rows="9">9</button>
+                        <button class="row-button active" data-rows="10">10</button>
+                        <button class="row-button" data-rows="11">11</button>
+                        <button class="row-button" data-rows="12">12</button>
+                        <button class="row-button" data-rows="13">13</button>
+                        <button class="row-button" data-rows="14">14</button>
+                        <button class="row-button" data-rows="15">15</button>
+                        <button class="row-button" data-rows="16">16</button>
+                    </div>
+                </div>
+
+                <button id="dropButton" class="play-button">
+                    <span class="button-text">DROP BALL</span>
+                    <span class="button-subtext">Possible Win: <span id="possibleWin">0</span>×</span>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="main-content">
+            <div class="game-container">
+                <div class="multipliers-row">
+                    <!-- Multipliers will be added by JavaScript -->
+                </div>
+                <div class="plinko-board">
+                    <canvas id="plinkoCanvas"></canvas>
+                </div>
+                <div id="winMessage" class="win-message hidden">
+                    <span class="win-amount">0×</span>
+            </div>
+        </div>
+
+        <div class="history-container">
+            <h3>Recent Drops</h3>
+            <div id="gameHistory" class="history-list"></div>
+        </div>
+    </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battleship - SpendingPants Arcade</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-layout">
+        <div class="sidebar">
+            <div class="balance-container">
+                <h2>Balance</h2>
+                <div class="balance-display">
+                    <span id="balance">0</span>
+                    <span class="currency">Tokens</span>
+                </div>
+            </div>
+
+            <div class="controls-container">
+                <div class="bet-section">
+                    <h3>Bet Amount</h3>
+                    <div class="bet-input">
+                        <input type="number" id="betAmount" value="10" min="1">
+                        <div class="bet-buttons">
+                            <button class="bet-button" data-action="half">½</button>
+                            <button class="bet-button" data-action="double">2×</button>
+                            <button class="bet-button" data-action="max">Max</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-section">
+                    <div class="stat-item">
+                        <span class="stat-label">Multiplier</span>
+                        <span id="multiplier" class="stat-value">1.00×</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Shots Left</span>
+                        <span id="shotsLeft" class="stat-value">10</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Hits</span>
+                        <span class="stat-value"><span id="hits">0</span>/<span id="totalHits">17</span></span>
+                    </div>
+                </div>
+
+                <button id="startGame" class="play-button">
+                    <span class="button-text">START GAME</span>
+                </button>
+
+                <div class="info-section">
+                    <h3>Instructions</h3>
+                    <div class="info-content">
+                        <p>Click on grid cells to fire!</p>
+                        <p class="small">Find and sink all ships to win!</p>
+                        <p class="small">Multiplier increases with consecutive hits!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="game-container">
+                <div class="game-area">
+                    <div class="grid-container">
+                        <div class="grid" id="gameGrid"></div>
+                        <div class="grid-overlay"></div>
+                    </div>
+                    <div class="ship-status">
+                        <div class="ship carrier">
+                            <span class="ship-name">Carrier (5)</span>
+                            <div class="ship-health"></div>
+                        </div>
+                        <div class="ship battleship">
+                            <span class="ship-name">Battleship (4)</span>
+                            <div class="ship-health"></div>
+                        </div>
+                        <div class="ship cruiser">
+                            <span class="ship-name">Cruiser (3)</span>
+                            <div class="ship-health"></div>
+                        </div>
+                        <div class="ship submarine">
+                            <span class="ship-name">Submarine (3)</span>
+                            <div class="ship-health"></div>
+                        </div>
+                        <div class="ship destroyer">
+                            <span class="ship-name">Destroyer (2)</span>
+                            <div class="ship-health"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-info">
+                    <div id="status"></div>
+                    <div id="result" class="hidden"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="history-container">
+            <h3>Recent Games</h3>
+            <div id="gameHistory" class="history-list"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

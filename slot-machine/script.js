@@ -8,7 +8,7 @@ const symbols = {
     lime: { symbol: '🫐', weight: 8, value: 8 },
     raspberry: { symbol: '🍇', weight: 6, value: 10 },
     bar: { symbol: '💎', weight: 4, value: 15 },
-    wild: { symbol: '⭐', weight: 10,alue: 0 }// Wild card can count as any symbol
+    wild: { symbol: '⭐', weight: 30, value: 0 }// Wild card can count as any symbol
 
 };
 
@@ -91,7 +91,13 @@ function calculateWinnings(results) {
             const totalCount = count + wildCount;  // Add wild cards to the count
             if (totalCount >= 3) {
                 const symbolData = symbols[symbol];
-                winMultiplier = Math.max(winMultiplier, symbolData.value * (totalCount - 2));
+                // Base multiplier is the symbol's value
+                let multiplier = symbolData.value;
+                // Add bonus for additional matches beyond 3
+                if (totalCount > 3) {
+                    multiplier *= (totalCount - 2);  // Scale up for 4 or 5 matches
+                }
+                winMultiplier = Math.max(winMultiplier, multiplier);
             }
         }
     }
@@ -99,7 +105,11 @@ function calculateWinnings(results) {
     // Special case: all wild cards
     if (wildCount >= 3) {
         // Use the highest value symbol (bar) for all wilds
-        winMultiplier = Math.max(winMultiplier, symbols.bar.value * (wildCount - 2));
+        let multiplier = symbols.bar.value;
+        if (wildCount > 3) {
+            multiplier *= (wildCount - 2);  // Scale up for 4 or 5 wild cards
+        }
+        winMultiplier = Math.max(winMultiplier, multiplier);
     }
 
     return currentBet * winMultiplier;
@@ -161,18 +171,41 @@ async function spin() {
     spinButton.disabled = false;
 }
 
-// Bet controls
-document.getElementById('decreaseBet').addEventListener('click', () => {
-    if (currentBet > 1 && !isSpinning) {
-        currentBet--;
-        currentBetEl.textContent = currentBet;
-    }
+// Bet control functions
+function updateBet(newBet) {
+    if (isSpinning) return;
+    newBet = Math.max(1, Math.min(balance, Math.floor(newBet)));
+    currentBet = newBet;
+    currentBetEl.value = newBet;
+}
+
+function adjustBet(amount) {
+    if (isSpinning) return;
+    updateBet(currentBet + amount);
+}
+
+// Bet control event listeners
+document.getElementById('increaseBetLarge').addEventListener('click', () => adjustBet(10));
+document.getElementById('increaseBet').addEventListener('click', () => adjustBet(1));
+document.getElementById('decreaseBet').addEventListener('click', () => adjustBet(-1));
+document.getElementById('decreaseBetLarge').addEventListener('click', () => adjustBet(-10));
+
+// Handle direct bet input
+currentBetEl.addEventListener('input', (e) => {
+    let value = parseInt(e.target.value) || 0;
+    updateBet(value);
 });
 
-document.getElementById('increaseBet').addEventListener('click', () => {
-    if (currentBet < balance && !isSpinning) {
-        currentBet++;
-        currentBetEl.textContent = currentBet;
+currentBetEl.addEventListener('blur', () => {
+    // Ensure the display shows the actual bet amount when focus is lost
+    currentBetEl.value = currentBet;
+});
+
+// Prevent form submission on enter key
+currentBetEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        currentBetEl.blur();
     }
 });
 

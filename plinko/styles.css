@@ -1,0 +1,225 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #333333;
+    font-family: Arial, sans-serif;
+    color: white;
+}
+
+.game-layout {
+    width: 100%;
+    max-width: 1400px;
+    height: 100vh;
+    max-height: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.main-content {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    max-width: 1360px; /* 1400px - 2 * 20px padding */
+    margin: 0 auto;
+}
+
+.controls-container {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: #1E2029;
+    padding: 25px;
+    border-radius: 12px;
+}
+
+.balance-display {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.balance-display .currency {
+    color: #4CAF50;
+    margin-right: 5px;
+}
+
+.section-label {
+    color: #8E8E8E;
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.bet-input {
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.currency {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #4CAF50;
+}
+
+#currentBet {
+    width: 100%;
+    padding: 12px;
+    padding-left: 30px;
+    font-size: 16px;
+    text-align: left;
+    border: 2px solid #272B39;
+    border-radius: 8px;
+    background: #272B39;
+    color: white;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#currentBet:focus {
+    border-color: #4CAF50;
+    background: #272B39;
+}
+
+.bet-buttons, .risk-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.bet-button, .risk-button, .row-button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #272B39;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.bet-button:hover, .risk-button:hover, .row-button:hover {
+    background: #4CAF50;
+    transform: translateY(-2px);
+}
+
+.risk-button.active, .row-button.active {
+    background: #4CAF50;
+}
+
+.rows-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.row-button {
+    padding: 12px;
+    font-size: 14px;
+}
+
+.game-container {
+    flex: 1;
+    background: #1E2029;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.plinko-board {
+    width: 100%;
+    height: 100%;
+    max-height: calc(100vh - 150px);
+    aspect-ratio: 1/1;
+    background: #1E2029;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+#plinkoCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+.play-button {
+    padding: 14px;
+    font-size: 16px;
+    background: #272B39;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-top: auto;
+}
+
+.play-button:hover {
+    background: #4CAF50;
+    transform: translateY(-2px);
+}
+
+#currentBet::-webkit-inner-spin-button,
+#currentBet::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#currentBet[type=number] {
+    -moz-appearance: textfield;
+}
+
+@media (max-width: 1400px) {
+    .game-layout {
+        padding: 10px;
+        height: 100vh;
+        max-height: 100vh;
+    }
+    .main-content {
+        max-width: calc(100% - 20px);
+    }
+    .plinko-board {
+        max-height: calc(100vh - 100px);
+    }
+}
+
+@media (max-width: 768px) {
+    .game-layout {
+        height: auto;
+        max-height: none;
+    }
+    .main-content {
+        flex-direction: column;
+        gap: 10px;
+        height: auto;
+    }
+    
+    .controls-container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .game-container {
+        padding: 15px;
+        height: auto;
+    }
+
+    .plinko-board {
+        aspect-ratio: 1/1;
+        height: auto;
+        max-height: none;
+    }
+}

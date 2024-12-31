@@ -25,6 +25,7 @@
                 <div class="symbol-item">🫐 = 8x</div>
                 <div class="symbol-item">🍇 = 10x</div>
                 <div class="symbol-item">💎 = 15x</div>
+                <div class="symbol-item">⭐ = Wild</div>
             </div>
             <div class="winning-info">
                 <p>Match 3 symbols: Base multiplier</p>
@@ -48,9 +49,13 @@
 
         <div class="controls">
             <div class="bet-controls">
-                <button id="decreaseBet">-</button>
-                <span id="currentBet">1</span>
-                <button id="increaseBet">+</button>
+                <div class="bet-buttons">
+                    <button id="decreaseBetLarge" class="bet-button">-10</button>
+                    <button id="decreaseBet" class="bet-button">-1</button>
+                    <input type="number" id="currentBet" value="1" min="1">
+                    <button id="increaseBet" class="bet-button">+1</button>
+                    <button id="increaseBetLarge" class="bet-button">+10</button>
+                </div>
             </div>
             <button id="spinButton" class="spin-button">SPIN</button>
         </div>

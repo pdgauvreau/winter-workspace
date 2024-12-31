@@ -149,29 +149,58 @@ body {
 }
 
 .bet-controls {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    margin: 10px 0;
 }
 
-.bet-controls button {
-    width: 30px;
-    height: 30px;
+.bet-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.bet-button {
+    padding: 8px 12px;
     border: none;
-    border-radius: 50%;
+    border-radius: 4px;
     background: #4CAF50;
     color: white;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 14px;
+    transition: background 0.3s;
+    min-width: 40px;
 }
 
-.bet-controls button:hover {
+.bet-button:hover {
     background: #45a049;
 }
 
 #currentBet {
-    font-size: 24px;
-    min-width: 40px;
+    width: 80px;
+    padding: 8px;
+    font-size: 16px;
+    text-align: center;
+    border: 2px solid #4CAF50;
+    border-radius: 4px;
+    background: #333;
+    color: white;
+    outline: none;
+}
+
+#currentBet:focus {
+    border-color: #45a049;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+/* Remove number input arrows */
+#currentBet::-webkit-inner-spin-button,
+#currentBet::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#currentBet[type=number] {
+    -moz-appearance: textfield;
 }
 
 .spin-button {

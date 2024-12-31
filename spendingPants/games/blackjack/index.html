@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blackjack</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-layout">
+        <div class="sidebar">
+            <div class="balance-container">
+                <h2>Balance</h2>
+                <div class="balance-display">
+                    <span id="balance">0</span>
+                    <span class="currency">Tokens</span>
+                </div>
+            </div>
+
+            <div class="controls-container">
+                <div class="bet-section">
+                    <h3>Bet Amount</h3>
+                    <div class="bet-input">
+                        <input type="number" id="currentBet" value="10" min="1">
+                        <div class="bet-buttons">
+                            <button class="bet-button" data-action="half">½</button>
+                            <button class="bet-button" data-action="double">2×</button>
+                            <button class="bet-button" data-action="max">Max</button>
+                        </div>
+                        <div class="quick-bet-buttons">
+                            <button id="decreaseBetLarge" class="quick-bet">-10</button>
+                            <button id="decreaseBet" class="quick-bet">-1</button>
+                            <button id="increaseBet" class="quick-bet">+1</button>
+                            <button id="increaseBetLarge" class="quick-bet">+10</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="game-controls">
+                    <button id="dealButton" class="play-button">
+                        <span class="button-text">DEAL</span>
+                    </button>
+                    <div class="action-buttons">
+                        <button id="hitButton" class="action-button" disabled>HIT</button>
+                        <button id="standButton" class="action-button" disabled>STAND</button>
+                        <button id="splitButton" class="action-button" disabled>SPLIT</button>
+                    </div>
+                    <div class="hand-controls">
+                        <button id="addHandButton" class="action-button">ADD HAND</button>
+                        <button id="removeHandButton" class="action-button" disabled>REMOVE HAND</button>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h3>Card Values</h3>
+                    <div class="symbols-grid">
+                        <div class="symbol-item">A = 1 or 11</div>
+                        <div class="symbol-item">2-10 = Face Value</div>
+                        <div class="symbol-item">J, Q, K = 10</div>
+                    </div>
+                    <div class="winning-info">
+                        <div class="info-item">
+                            <span class="info-label">Blackjack (21)</span>
+                            <span class="info-value">3:2</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Beat Dealer</span>
+                            <span class="info-value">1:1</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Push (Tie)</span>
+                            <span class="info-value">Return</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="game-container">
+                <div class="blackjack-table">
+                <div class="dealer-area">
+                    <h3>Dealer's Hand <span id="dealerScore" class="score"></span></h3>
+                    <div id="dealerHand" class="hand"></div>
+                </div>
+                
+                <div class="player-area">
+                    <div class="player-hand-container">
+                        <h3>Hand 1 <span id="playerScore" class="score"></span></h3>
+                        <div id="playerHands" class="hands">
+                            <div id="playerHand" class="hand"></div>
+                            <div id="splitHand" class="hand hidden"></div>
+                        </div>
+                        <span id="splitScore" class="score split-score hidden"></span>
+                    </div>
+                    <div class="player-hand-container hidden" id="secondHandContainer">
+                        <h3>Hand 2 <span id="secondHandScore" class="score"></span></h3>
+                        <div id="secondHand" class="hand"></div>
+                    </div>
+                    <div class="player-hand-container hidden" id="thirdHandContainer">
+                        <h3>Hand 3 <span id="thirdHandScore" class="score"></span></h3>
+                        <div id="thirdHand" class="hand"></div>
+                    </div>
+                </div>
+                </div>
+                <div id="message" class="message"></div>
+            </div>
+        </div>
+
+        <div class="history-container">
+            <h3>Game History</h3>
+            <div id="gameHistory" class="history-list"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

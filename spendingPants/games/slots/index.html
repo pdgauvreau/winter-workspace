@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slots - SpendingPants Arcade</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-layout">
+        <div class="sidebar">
+            <div class="balance-container">
+                <h2>Balance</h2>
+                <div class="balance-display">
+                    <span id="balance">0</span>
+                    <span class="currency">Tokens</span>
+                </div>
+            </div>
+
+            <div class="controls-container">
+                <div class="bet-section">
+                    <h3>Bet Amount</h3>
+                    <div class="bet-input">
+                        <input type="number" id="currentBet" value="10" min="1">
+                        <div class="bet-buttons">
+                            <button class="bet-button" data-action="half">½</button>
+                            <button class="bet-button" data-action="double">2×</button>
+                            <button class="bet-button" data-action="max">Max</button>
+                        </div>
+                        <div class="quick-bet-buttons">
+                            <button id="decreaseBetLarge" class="quick-bet">-10</button>
+                            <button id="decreaseBet" class="quick-bet">-1</button>
+                            <button id="increaseBet" class="quick-bet">+1</button>
+                            <button id="increaseBetLarge" class="quick-bet">+10</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="payouts-container">
+                    <h3>Symbol Values</h3>
+                    <div class="symbols-grid">
+                        <div class="symbol-item">
+                            <span class="symbol">💎</span>
+                            <span class="value">15×</span>
+                        </div>
+                        <div class="symbol-item">
+                            <span class="symbol">🍇</span>
+                            <span class="value">10×</span>
+                        </div>
+                        <div class="symbol-item">
+                            <span class="symbol">🫐</span>
+                            <span class="value">8×</span>
+                        </div>
+                        <div class="symbol-item">
+                            <span class="symbol">🍌</span>
+                            <span class="value">6×</span>
+                        </div>
+                        <div class="symbol-item">
+                            <span class="symbol">🍎</span>
+                            <span class="value">5×</span>
+                        </div>
+                        <div class="symbol-item">
+                            <span class="symbol">🍊</span>
+                            <span class="value">4×</span>
+                        </div>
+                        <div class="symbol-item">
+                            <span class="symbol">🍋</span>
+                            <span class="value">3×</span>
+                        </div>
+                        <div class="symbol-item">
+                            <span class="symbol">🍒</span>
+                            <span class="value">2×</span>
+                        </div>
+                        <div class="symbol-item">
+                            <span class="symbol">❌</span>
+                            <span class="value">0×</span>
+                        </div>
+                    </div>
+                    <div class="multiplier-info">
+                        <div class="info-item">
+                            <span class="info-label">3 Matching:</span>
+                            <span class="info-value">Base Value</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">4 Matching:</span>
+                            <span class="info-value">2× Value</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">5 Matching:</span>
+                            <span class="info-value">3× Value</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="spinButton" class="spin-button">
+                    <span class="button-text">SPIN</span>
+                    <span class="button-subtext">Max Win: <span id="maxWin">0</span> Tokens</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="slot-machine">
+                <div class="win-line-container">
+                    <!-- Win lines will be added by JavaScript -->
+                </div>
+                <div class="slots-container">
+                    <div class="slot" id="slot1">🍒</div>
+                    <div class="slot" id="slot2">🍌</div>
+                    <div class="slot" id="slot3">🍊</div>
+                    <div class="slot" id="slot4">🍎</div>
+                    <div class="slot" id="slot5">🍋</div>
+                </div>
+                <div id="winMessage" class="win-message hidden">
+                    <span class="win-amount">0</span>
+                    <span class="win-text">Tokens</span>
+                </div>
+            </div>
+        </div>
+        <div class="history-container">
+            <h3>Recent Spins</h3>
+            <div id="winHistory" class="history-list"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

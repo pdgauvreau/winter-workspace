@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Plinko - SpendingPants Arcade</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.19.0/matter.min.js"></script>
+</head>
+<body>
+    <div class="game-container">
+        <div class="control-panel">
+            <div class="balance-section">
+                <div class="balance-display">
+                    <span class="label">BALANCE</span>
+                    <span id="balance" class="value">1000</span>
+                    <span class="currency">TOKENS</span>
+                </div>
+            </div>
+
+            <div class="betting-section">
+                <div class="bet-control">
+                    <label for="betAmount">BET AMOUNT</label>
+                    <div class="bet-input-group">
+                        <button class="bet-btn" data-action="min">MIN</button>
+                        <input type="number" id="betAmount" value="10" min="1">
+                        <button class="bet-btn" data-action="max">MAX</button>
+                    </div>
+                </div>
+
+                <div class="balls-control">
+                    <label>BALLS</label>
+                    <div class="balls-buttons">
+                        <button class="ball-btn active" data-balls="1">1</button>
+                        <button class="ball-btn" data-balls="3">3</button>
+                        <button class="ball-btn" data-balls="5">5</button>
+                    </div>
+                </div>
+
+                <div class="difficulty-control">
+                    <label>DIFFICULTY</label>
+                    <div class="difficulty-buttons">
+                        <button class="diff-btn" data-diff="easy">
+                            EASY
+                            <span class="multiplier">x1.5</span>
+                        </button>
+                        <button class="diff-btn active" data-diff="medium">
+                            MEDIUM
+                            <span class="multiplier">x3</span>
+                        </button>
+                        <button class="diff-btn" data-diff="hard">
+                            HARD
+                            <span class="multiplier">x5</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <button id="launchBtn" class="launch-button">
+                <span class="main-text">LAUNCH</span>
+                <span class="sub-text">MAX WIN: <span id="maxWin">0</span>×</span>
+            </button>
+        </div>
+
+        <div class="game-board">
+            <canvas id="gameCanvas"></canvas>
+            <div id="multiplierZones" class="multiplier-zones"></div>
+            <div id="winPopup" class="win-popup hidden">
+                <span class="win-amount">0×</span>
+            </div>
+        </div>
+
+        <div class="history-panel">
+            <h3>HISTORY</h3>
+            <div id="historyList" class="history-list"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

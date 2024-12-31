@@ -1,7 +1,7 @@
 // Function definitions
 function updateSliderPosition(position) {
-    // Ensure position is an integer
-    position = Math.round(position);
+    // Ensure position is an integer and clamp between 0-100
+    position = Math.round(Math.max(0, Math.min(100, position)));
     sliderPosition = position;
     slider.style.left = `${position}%`;
     dragButton.style.left = `${position}%`;
@@ -9,12 +9,14 @@ function updateSliderPosition(position) {
     
     // Update multiplier display
     const multiplier = calculateMultiplier(position);
-    multiplierValue.textContent = multiplier;
+    multiplierValue.textContent = multiplier.toFixed(2);
 }
 
 function calculateMultiplier(position) {
-    // Higher risk (higher position) = higher reward
-    return (100 / (100 - position)).toFixed(2);
+    // Calculate multiplier based on selected area size
+    // Smaller area = higher multiplier
+    const selectedArea = prediction === 'over' ? 100 - position : position;
+    return 95 / selectedArea;
 }
 
 function getPositionFromEvent(e) {
@@ -27,9 +29,8 @@ function getPositionFromEvent(e) {
     // Calculate relative position within the effective area (0 to 1)
     const relativeX = (clientX - (rect.left + padding)) / effectiveWidth;
     
-    // Convert to percentage and clamp between 50-100
-    const percentage = relativeX * 100;
-    return Math.max(50, Math.min(100, Math.round(percentage)));
+    // Convert to percentage (0-100)
+    return Math.round(relativeX * 100);
 }
 
 function startDragging(e) {
@@ -63,7 +64,7 @@ function drag(e) {
     const deltaPercentage = (deltaX / effectiveWidth) * 100;
     
     // Update position based on initial position plus movement
-    const newPosition = Math.max(50, Math.min(100, dragStartLeft + deltaPercentage));
+    const newPosition = Math.max(0, Math.min(100, dragStartLeft + deltaPercentage));
     updateSliderPosition(newPosition);
 }
 
@@ -87,7 +88,8 @@ function addToHistory(position, result, isWin, amount, multiplier) {
     historyItem.innerHTML = `
         <div style="margin-bottom: 5px">
             <span>Position: ${position}</span>
-            ${isWin ? `<span style="color: #aaa"> | ${multiplier}x</span>` : ''}
+            <span style="color: #aaa"> | Bet ${prediction.toUpperCase()}</span>
+            ${isWin ? `<span style="color: #aaa"> | ${multiplier.toFixed(2)}x</span>` : ''}
         </div>
         <div style="color: #aaa">Result: ${result}</div>
         <div style="margin-top: 5px">${amountText}</div>
@@ -108,13 +110,15 @@ let isDragging = false;
 let sliderPosition = 50;
 let dragStartX = 0;
 let dragStartLeft = 0;
+let prediction = null;
 
 const slider = document.getElementById('slider');
 const sliderValue = document.getElementById('sliderValue');
 const resultMarker = document.getElementById('resultMarker');
 const balanceElement = document.getElementById('balance');
 const currentBetElement = document.getElementById('currentBet');
-const playButton = document.getElementById('playButton');
+const betUnderButton = document.getElementById('betUnder');
+const betOverButton = document.getElementById('betOver');
 const messageElement = document.getElementById('message');
 const historyList = document.getElementById('historyList');
 const bar = document.querySelector('.bar');
@@ -124,18 +128,39 @@ const dragButton = document.getElementById('dragButton');
 // Initialize slider position
 updateSliderPosition(50);
 
-// Add event listeners
-document.getElementById('increaseBet').addEventListener('click', () => {
-    if (currentBet + 10 <= balance) {
-        currentBet += 10;
-        currentBetElement.textContent = currentBet;
-    }
+// Bet control functions
+function updateBet(newBet) {
+    newBet = Math.max(1, Math.min(balance, Math.floor(newBet)));
+    currentBet = newBet;
+    currentBetElement.value = newBet;
+}
+
+function changeBet(amount) {
+    updateBet(currentBet + amount);
+}
+
+// Add bet control event listeners
+document.getElementById('increaseBetLarge').addEventListener('click', () => changeBet(10));
+document.getElementById('increaseBet').addEventListener('click', () => changeBet(1));
+document.getElementById('decreaseBet').addEventListener('click', () => changeBet(-1));
+document.getElementById('decreaseBetLarge').addEventListener('click', () => changeBet(-10));
+
+// Handle direct bet input
+currentBetElement.addEventListener('input', (e) => {
+    let value = parseInt(e.target.value) || 0;
+    updateBet(value);
 });
 
-document.getElementById('decreaseBet').addEventListener('click', () => {
-    if (currentBet - 10 >= 10) {
-        currentBet -= 10;
-        currentBetElement.textContent = currentBet;
+currentBetElement.addEventListener('blur', () => {
+    // Ensure the display shows the actual bet amount when focus is lost
+    currentBetElement.value = currentBet;
+});
+
+// Prevent form submission on enter key
+currentBetElement.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        currentBetElement.blur();
     }
 });
 
@@ -164,8 +189,29 @@ document.addEventListener('mouseup', stopDragging);
 document.addEventListener('touchend', stopDragging);
 document.addEventListener('touchcancel', stopDragging);
 
-// Add play button event listener
-playButton.addEventListener('click', async () => {
+// Add prediction button event listeners
+function selectPrediction(pred) {
+    prediction = pred;
+    betUnderButton.classList.toggle('selected', pred === 'under');
+    betOverButton.classList.toggle('selected', pred === 'over');
+    
+    // Update multiplier based on new prediction
+    const multiplier = calculateMultiplier(sliderPosition);
+    multiplierValue.textContent = multiplier.toFixed(2);
+}
+
+// Add prediction button event listeners
+betUnderButton.addEventListener('click', () => selectPrediction('under'));
+betOverButton.addEventListener('click', () => selectPrediction('over'));
+
+// Add play functionality
+async function playGame() {
+    if (!prediction) {
+        messageElement.textContent = 'Select OVER or UNDER first!';
+        messageElement.style.color = '#f44336';
+        return;
+    }
+
     if (balance < currentBet) {
         messageElement.textContent = 'Insufficient balance!';
         messageElement.style.color = '#f44336';
@@ -174,6 +220,8 @@ playButton.addEventListener('click', async () => {
 
     // Disable controls
     playButton.disabled = true;
+    betUnderButton.disabled = true;
+    betOverButton.disabled = true;
     dragButton.style.pointerEvents = 'none';
     slider.style.pointerEvents = 'none';
 
@@ -186,7 +234,7 @@ playButton.addEventListener('click', async () => {
     slider.style.opacity = '0.5';
     dragButton.style.opacity = '0.5';
 
-    // Generate random number with animation delay
+    // Generate random number
     await new Promise(resolve => setTimeout(resolve, 500));
     const randomNumber = Math.floor(Math.random() * 101);
 
@@ -196,7 +244,9 @@ playButton.addEventListener('click', async () => {
     resultMarker.style.opacity = '1';
 
     // Calculate win/loss
-    const isWin = randomNumber >= sliderPosition;
+    const isWin = prediction === 'over' 
+        ? randomNumber > sliderPosition 
+        : randomNumber < sliderPosition;
     const multiplier = calculateMultiplier(sliderPosition);
     const winAmount = isWin ? Math.floor(currentBet * multiplier) : 0;
 
@@ -213,7 +263,7 @@ playButton.addEventListener('click', async () => {
 
     // Display message
     messageElement.textContent = isWin 
-        ? `You won $${winAmount}! (${multiplier}x)` 
+        ? `You won $${winAmount}! (${multiplier.toFixed(2)}x)` 
         : 'You lost!';
     messageElement.style.color = isWin ? '#4CAF50' : '#f44336';
 
@@ -226,7 +276,12 @@ playButton.addEventListener('click', async () => {
         slider.style.opacity = '1';
         dragButton.style.opacity = '1';
         playButton.disabled = false;
+        betUnderButton.disabled = false;
+        betOverButton.disabled = false;
         slider.style.pointerEvents = 'auto';
         dragButton.style.pointerEvents = 'auto';
     }, 2000);
-});
+}
+
+const playButton = document.getElementById('playButton');
+playButton.addEventListener('click', playGame);

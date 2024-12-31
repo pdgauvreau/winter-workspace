@@ -173,47 +173,127 @@ body {
 }
 
 .bet-controls {
-    display: flex;
-    align-items: center;
-    gap: 10px;
     margin: 10px 0;
 }
 
-.bet-controls button {
-    width: 30px;
-    height: 30px;
+.bet-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bet-button {
+    padding: 8px 12px;
     border: none;
-    border-radius: 50%;
+    border-radius: 4px;
     background: #4CAF50;
     color: white;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 14px;
     transition: background 0.3s;
+    min-width: 40px;
 }
 
-.bet-controls button:hover {
+.bet-button:hover {
     background: #45a049;
 }
 
 #currentBet {
-    font-size: 24px;
-    min-width: 40px;
+    width: 80px;
+    padding: 8px;
+    font-size: 16px;
     text-align: center;
+    border: 2px solid #4CAF50;
+    border-radius: 4px;
+    background: #333;
+    color: white;
+    outline: none;
 }
 
-.play-button {
+#currentBet:focus {
+    border-color: #45a049;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+/* Remove number input arrows */
+#currentBet::-webkit-inner-spin-button,
+#currentBet::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#currentBet[type=number] {
+    -moz-appearance: textfield;
+}
+
+.prediction-controls {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.prediction-button {
     padding: 12px 30px;
     font-size: 16px;
-    background: #f44336;
     border: none;
     border-radius: 5px;
     color: white;
     cursor: pointer;
     transition: background 0.3s, transform 0.2s;
+    opacity: 0.8;
+}
+
+.prediction-button:hover {
+    transform: translateY(-2px);
+    opacity: 1;
+}
+
+.prediction-button:active {
+    transform: translateY(0);
+}
+
+.prediction-button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    opacity: 0.5;
+}
+
+#betUnder {
+    background: #2196F3;
+}
+
+#betUnder:hover {
+    background: #1976D2;
+}
+
+#betOver {
+    background: #f44336;
+}
+
+#betOver:hover {
+    background: #d32f2f;
+}
+
+.prediction-button.selected {
+    opacity: 1;
+    box-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+
+.play-button {
+    padding: 12px 30px;
+    font-size: 16px;
+    background: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 10px;
 }
 
 .play-button:hover {
-    background: #d32f2f;
+    background: #45a049;
     transform: translateY(-2px);
 }
 

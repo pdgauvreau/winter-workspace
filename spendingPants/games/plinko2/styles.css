@@ -1,0 +1,248 @@
+:root {
+    --neon-primary: #00ff9d;
+    --neon-secondary: #ff00ff;
+    --neon-tertiary: #00ffff;
+    --bg-dark: #0a0a0f;
+    --bg-darker: #050508;
+    --panel-bg: rgba(16, 16, 24, 0.9);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Orbitron', sans-serif;
+}
+
+body {
+    background: var(--bg-dark);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.game-container {
+    display: grid;
+    grid-template-columns: 300px 1fr 200px;
+    gap: 20px;
+    padding: 20px;
+    width: 100%;
+    max-width: 1400px;
+    height: 90vh;
+    background: var(--bg-darker);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 255, 157, 0.2);
+}
+
+.control-panel {
+    background: var(--panel-bg);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border: 1px solid var(--neon-primary);
+    box-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
+}
+
+.balance-display {
+    background: linear-gradient(45deg, var(--bg-darker), var(--panel-bg));
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    border: 1px solid var(--neon-tertiary);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+}
+
+.label {
+    font-size: 0.8em;
+    color: var(--neon-tertiary);
+    text-shadow: 0 0 5px var(--neon-tertiary);
+}
+
+.value {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--neon-primary);
+    text-shadow: 0 0 10px var(--neon-primary);
+    display: block;
+    margin: 5px 0;
+}
+
+.betting-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.bet-input-group {
+    display: flex;
+    gap: 5px;
+}
+
+input[type="number"] {
+    background: var(--bg-darker);
+    border: 1px solid var(--neon-primary);
+    color: var(--neon-primary);
+    padding: 8px;
+    border-radius: 5px;
+    width: 100%;
+    text-align: center;
+    font-size: 1.1em;
+}
+
+.bet-btn, .ball-btn, .diff-btn {
+    background: var(--bg-darker);
+    border: 1px solid var(--neon-secondary);
+    color: var(--neon-secondary);
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.bet-btn:hover, .ball-btn:hover, .diff-btn:hover {
+    background: var(--neon-secondary);
+    color: var(--bg-darker);
+    box-shadow: 0 0 10px var(--neon-secondary);
+}
+
+.balls-buttons, .difficulty-buttons {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.ball-btn, .diff-btn {
+    flex: 1;
+    text-align: center;
+}
+
+.ball-btn.active, .diff-btn.active {
+    background: var(--neon-primary);
+    color: var(--bg-darker);
+    border-color: var(--neon-primary);
+    box-shadow: 0 0 10px var(--neon-primary);
+}
+
+.multiplier {
+    display: block;
+    font-size: 0.8em;
+    margin-top: 3px;
+    color: var(--neon-tertiary);
+}
+
+.launch-button {
+    background: linear-gradient(45deg, var(--neon-primary), var(--neon-secondary));
+    border: none;
+    color: var(--bg-darker);
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: auto;
+    transition: all 0.3s ease;
+}
+
+.launch-button:hover {
+    box-shadow: 0 0 20px var(--neon-primary);
+    transform: translateY(-2px);
+}
+
+.main-text {
+    display: block;
+}
+
+.sub-text {
+    font-size: 0.7em;
+    opacity: 0.8;
+}
+
+.game-board {
+    position: relative;
+    background: var(--panel-bg);
+    border-radius: 10px;
+    border: 1px solid var(--neon-tertiary);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+#gameCanvas {
+    width: 100%;
+    height: 100%;
+}
+
+.multiplier-zones {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.win-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    padding: 20px 40px;
+    border-radius: 10px;
+    border: 2px solid var(--neon-primary);
+    box-shadow: 0 0 30px var(--neon-primary);
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.win-popup.visible {
+    opacity: 1;
+}
+
+.win-amount {
+    font-size: 2.5em;
+    color: var(--neon-primary);
+    text-shadow: 0 0 10px var(--neon-primary);
+}
+
+.history-panel {
+    background: var(--panel-bg);
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid var(--neon-secondary);
+    box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
+}
+
+.history-panel h3 {
+    color: var(--neon-secondary);
+    text-shadow: 0 0 5px var(--neon-secondary);
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    max-height: calc(100% - 40px);
+}
+
+.history-item {
+    background: var(--bg-darker);
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid var(--neon-tertiary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}

@@ -59,9 +59,13 @@
 
             <div class="controls">
                 <div class="bet-controls">
-                    <button id="decreaseBet">-</button>
-                    <span id="currentBet">10</span>
-                    <button id="increaseBet">+</button>
+                    <div class="bet-buttons">
+                        <button id="decreaseBetLarge" class="bet-button">-10</button>
+                        <button id="decreaseBet" class="bet-button">-1</button>
+                        <input type="number" id="currentBet" value="10" min="1">
+                        <button id="increaseBet" class="bet-button">+1</button>
+                        <button id="increaseBetLarge" class="bet-button">+10</button>
+                    </div>
                 </div>
                 <div class="game-buttons">
                     <button id="dealButton" class="action-button">DEAL</button>
